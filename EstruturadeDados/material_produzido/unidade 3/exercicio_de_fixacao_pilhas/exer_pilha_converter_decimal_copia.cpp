@@ -1,24 +1,24 @@
-#include <iostream>
-#include <string>
-#include <cmath>
+// #include <iostream>
+// #include <string>
+// #include <cmath>
 
-using namespace std;
+// using namespace std;
 
-struct Node {
-  int data;
-  Node *next;
-};
+// struct Node {
+//   int data;
+//   Node *next;
+// };
 
-Node* newNode(int data) {
-  Node* node = new Node;
-  node->data = data;
-  node->next = NULL;
+// Node* newNode(int data) {
+//   Node* node = new Node;
+//   node->data = data;
+//   node->next = NULL;
 
-  return node;
+//   return node;
   
-}
+// }
 
-void push(Node** top, int data) {
-  Node* node = newNode(data);
-  node 
-}
+// void push(Node** top, int data) {
+//   Node* node = newNode(data);
+//   node 
+// }
