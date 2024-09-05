@@ -54,3 +54,70 @@ estejam implementadas corretamente.
 
 */
 
+
+
+#include <iostream>
+#include <queue>
+#include <string>
+
+using namespace std;
+
+// Estrutura para representar uma pessoa (Homem ou Mulher)
+struct Pessoa {
+    string nome;
+    char genero; // 'H' para homem e 'M' para mulher
+};
+
+// Função para tentar formar pares de dança
+void formarPares(queue<Pessoa>& homens, queue<Pessoa>& mulheres) {
+    while (!homens.empty() && !mulheres.empty()) {
+        Pessoa homem = homens.front();
+        Pessoa mulher = mulheres.front();
+        homens.pop();
+        mulheres.pop();
+        cout << "Par: " << mulher.nome << " e " << homem.nome << endl;
+    }
+}
+
+int main() {
+    // Filas para armazenar os homens e as mulheres esperando para dançar
+    queue<Pessoa> homens;
+    queue<Pessoa> mulheres;
+
+    // Lista de pessoas que chegam para dançar
+    Pessoa pessoas[] = {
+        {"Joana", 'M'},
+        {"Francisco", 'H'},
+        {"João", 'H'},
+        {"Samuel", 'H'},
+        {"Maria", 'M'},
+        {"Davi", 'H'},
+        {"Christiano", 'H'},
+        {"Beatriz", 'M'}
+    };
+
+    // Processando as pessoas que chegam na pista de dança
+    for (int i = 0; i < 8; i++) {
+        Pessoa p = pessoas[i];
+        if (p.genero == 'H') {
+            homens.push(p); // Adiciona à fila de homens
+        } else if (p.genero == 'M') {
+            mulheres.push(p); // Adiciona à fila de mulheres
+        }
+
+        // Tenta formar pares sempre que possível
+        formarPares(homens, mulheres);
+    }
+
+    // Verifica se sobrou alguém na fila após formar todos os pares possíveis
+    if (!homens.empty() || !mulheres.empty()) {
+        if (!homens.empty()) {
+            cout << homens.size() << " homem(ns) aguardando para dançar." << endl;
+        }
+        if (!mulheres.empty()) {
+            cout << mulheres.size() << " mulher(es) aguardando para dançar." << endl;
+        }
+    }
+
+    return 0;
+}
