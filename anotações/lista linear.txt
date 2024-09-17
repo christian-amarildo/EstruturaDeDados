@@ -45,3 +45,23 @@ lista item[lista ultimo] = x
 lista ultimo++
 }
 }
+
+retira(p, lista, x)
+input p posição valida da  lista e L (lista)
+output x (item da lista da posição p)
+pre condição: L é definida e p é uma posição valida da lista
+pos condição L' é a lista L sem o item x, com todos os itens deslocados de uma posição
+
+tipoitem retira (posição p, tipolista lista) {
+int aux
+tipoitem item
+item = (tipoitem) malloc (sizeof(tipoitem))
+if vazia(lista) || p>= lista ultimo
+cout a posição nao existe 
+return null
+}
+item = lista item[p];
+lista ultimo--;
+for (aux = p; aux < lista-> ultimo; aux++)
+lista-> item[aux] = lista->item[aux+1];
+return item;
