@@ -1,1 +1,47 @@
+lista linear é a estrutura de dados cuja a constituição é feita por uma sequencia de nodos, essa estrutura é a estrutura mais simples de manipulação
 
+int posição;
+iniciovetor 0
+maxtam 1000
+
+tipoitem{
+int valor;}
+tipoitem;
+
+tipolista{
+tipoitem item[maxtam]
+posição primeiro, ultimo;}
+tipolista
+
+flvazia(lista)
+input: l(lista)
+output: l'
+pre-condição: L é definida
+pós-condição: L' é definida e vazia
+
+void flvazia(tipolista lista){
+lista primeiro = iniciovetor
+lista ultimo = lista primeiro}
+
+vazia(lista)
+input l (lista)
+output B (true se lista vazia; senao retorna false)
+pre condição l é definida
+pos condição l não é modificada
+
+int vazia (tipolista lista){
+return (lista primeiro == lista ultimo
+
+insere(c,lista) insere x apos o ultimo
+input x (item da lista) e l (lista)
+pre condição l é definida e x é um item valido da lista
+pos condição l' é definida e vazia e o elemento item de L' é igual a x
+
+void insere (tipoitem x, tipolista lista){
+if(lista ultimo >= maxtam)
+cout << lista esta cheia << endl;
+else{
+lista item[lista ultimo] = x
+lista ultimo++
+}
+}
