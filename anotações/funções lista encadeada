@@ -1,0 +1,159 @@
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Função que inicializa uma lista
+
+InicializaLista()
+    // Aloca memória para a estrutura da lista.
+    lista = alocar memória para a estrutura de Lista
+    
+    // Imprime o tamanho de um inteiro, de um apontador e da estrutura de Lista.
+    imprimir "Tamanho de um inteiro:", tamanho_de(int)
+    imprimir "Tamanho de um apontador:", tamanho_de(apontador)
+    imprimir "Tamanho da estrutura Lista:", tamanho_de(Lista)
+    
+    // Imprime o endereço de memória da lista criada.
+    imprimir "Endereço da lista criada:", endereço_de(lista)
+    
+    // Retorna a lista inicializada.
+    retornar lista
+Esta função cria uma nova lista ao alocar memória para sua estrutura e fornece informações sobre os tamanhos dos tipos de dados utilizados, além de exibir o endereço de memória da lista criada.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Função que faz a lista ficar vazia
+
+FLVazia(Lista)
+    // Aloca memória para a primeira célula da lista.
+    Lista.primeiro = alocar memória para uma célula
+    
+    // Define o último elemento como sendo o primeiro.
+    Lista.ultimo = Lista.primeiro
+    
+    // Define que o próximo elemento do primeiro é nulo, indicando lista vazia.
+    Lista.primeiro.proximo = nulo
+Esta função inicializa a lista para um estado vazio, onde tanto o primeiro quanto o último apontam para a mesma célula inicial, e o próximo elemento é nulo, indicando que não há itens na lista.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Função que verifica se a lista está vazia
+
+Vazia(Lista)
+    // Verifica se o primeiro elemento é igual ao último.
+    se (Lista.primeiro == Lista.ultimo)
+        retornar verdadeiro  // A lista está vazia.
+    senão
+        retornar falso  // A lista contém elementos.
+Esta função determina se a lista está vazia ao comparar os apontadores do primeiro e do último elementos. Se eles forem iguais, não há elementos na lista além da célula cabeça.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Função que insere um elemento após um determinado apontador (E)
+
+Insere(x, Lista, E)
+    // Aloca memória para uma nova célula.
+    novaCelula = alocar memória para uma célula
+    
+    // Armazena o item x na nova célula.
+    novaCelula.item = x
+    
+    // A nova célula aponta para o próximo elemento de E.
+    novaCelula.proximo = E.proximo
+    
+    // Atualiza o último elemento da lista se necessário.
+    se (E.proximo == nulo)
+        Lista.ultimo = novaCelula  // Atualiza o último apontador.
+    
+    // E agora aponta para a nova célula inserida.
+    E.proximo = novaCelula
+Esta função insere um novo item na lista após o elemento apontado por E. Ela assegura que o apontador do último elemento da lista seja atualizado caso a inserção ocorra no final.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Função que remove o primeiro item após uma determinada célula
+
+RetiraIni(cel, Lista)
+    // Verifica se há um elemento a ser removido.
+    se (cel.proximo != nulo)
+        // Armazena o endereço do elemento a ser removido.
+        lixo = cel.proximo
+        
+        // Armazena o item do elemento a ser removido.
+        itemRemovido = lixo.item
+        
+        // Atualiza o apontador para pular o elemento removido.
+        cel.proximo = lixo.proximo
+        
+        // Atualiza o último elemento se necessário.
+        se (Lista.ultimo == lixo)
+            Lista.ultimo = cel  // O novo último é a célula atual.
+        
+        // Libera a memória do elemento removido.
+        liberar memória de(lixo)
+        
+        // Retorna o item que foi removido.
+        retornar itemRemovido
+    senão
+        // Se não há elemento após 'cel', não há nada para remover.
+        retornar nulo  // Ou um valor indicando que a remoção falhou.
+Esta função remove o primeiro elemento que vem após a célula especificada (cel) e retorna o item removido. Ela também atualiza o apontador do último elemento da lista caso o elemento removido seja o último.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Função que retorna o tamanho da lista
+
+Tamanho_lista(Lista)
+    contador = 0
+    atual = Lista.primeiro.proximo  // Inicia após a célula cabeça.
+    
+    // Percorre a lista contando os elementos.
+    enquanto (atual != nulo)
+        contador = contador + 1
+        atual = atual.proximo  // Avança para o próximo elemento.
+    
+    // Retorna o número total de elementos na lista.
+    retornar contador
+Esta função calcula o tamanho da lista ao percorrê-la desde o primeiro elemento válido (após a célula cabeça) e incrementa um contador para cada elemento encontrado.
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Função que imprime os itens da lista
+
+Imprime(Lista)
+    // Verifica se a lista está vazia.
+    se (Lista.primeiro.proximo == nulo)
+        imprimir "Lista vazia."
+    senão
+        imprimir "Valores na lista:"
+        atual = Lista.primeiro.proximo  // Inicia após a célula cabeça.
+        
+        // Percorre a lista e imprime detalhes de cada elemento.
+        enquanto (atual != nulo)
+            imprimir "Endereço:", endereço_de(atual), "Chave:", atual.item.chave, "Próximo:", endereço_de(atual.proximo)
+            atual = atual.proximo  // Avança para o próximo elemento.
+Esta função exibe todos os itens presentes na lista, mostrando o endereço de cada célula, o valor da chave armazenada e o endereço do próximo elemento. Se a lista não contiver elementos, ela informa que a lista está vazia.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Função que busca um elemento na lista pela chave
+
+Busca(chave, Lista)
+    encontrado = falso
+    atual = Lista.primeiro.proximo  // Inicia após a célula cabeça.
+    
+    // Percorre a lista em busca da chave especificada.
+    enquanto (atual != nulo e não encontrado)
+        se (atual.item.chave == chave)
+            encontrado = verdadeiro  // Elemento com a chave encontrada.
+        senão
+            atual = atual.proximo  // Avança para o próximo elemento.
+    
+    // Retorna verdadeiro se o elemento foi encontrado, falso caso contrário.
+    retornar encontrado
+Esta função procura por um elemento na lista cuja chave corresponda à chave fornecida. Ela retorna verdadeiro se encontrar o elemento, permitindo identificar a presença do item na lista.
+
