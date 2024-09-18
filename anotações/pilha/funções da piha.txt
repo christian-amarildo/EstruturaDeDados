@@ -136,3 +136,104 @@ int main() {
 -----------------------------------------------------------------------------------------------------------
 CODIGOS EM PSEUDOCODIGO
 -----------------------------------------------------------------------------------------------------------
+
+// Definição de tipos e estruturas
+
+Tipo TipoChave é Inteiro  // Define 'TipoChave' como um inteiro.
+
+Tipo TipoItem
+    chave: TipoChave       // Campo 'chave' do tipo 'TipoChave'.
+FimTipo
+
+Tipo Apontador é Referência para Celula  // Define 'Apontador' como referência para 'Celula'.
+
+Tipo Celula
+    item: TipoItem         // Item armazenado na célula.
+    prox: Apontador        // Referência para a próxima célula (nó) da pilha.
+FimTipo
+
+Tipo TipoPilha
+    topo: Apontador        // Referência para o topo da pilha.
+    fundo: Apontador       // Referência para o fundo da pilha (célula base).
+    tamanho: Inteiro       // Tamanho atual da pilha.
+FimTipo
+
+// Procedimento que inicializa a pilha vazia.
+Procedimento FPVazia(var pilha: TipoPilha)
+    pilha.topo ← novo Celula       // Aloca memória para a célula cabeça.
+    pilha.fundo ← pilha.topo       // 'fundo' aponta para a célula cabeça.
+    pilha.topo.prox ← nulo         // Próximo do topo é nulo, indicando fim da pilha.
+    pilha.tamanho ← 0              // Inicializa o tamanho da pilha com zero.
+FimProcedimento
+
+// Função que verifica se a pilha está vazia.
+Função vazia(pilha: TipoPilha): Booleano
+    retornar (pilha.topo = pilha.fundo)  // A pilha está vazia se topo e fundo são iguais.
+FimFunção
+
+// Procedimento que empilha um item no topo da pilha.
+Procedimento empilha(x: TipoItem, var pilha: TipoPilha)
+    var aux: Apontador                    // Declara um ponteiro auxiliar.
+    aux ← novo Celula                     // Aloca memória para a nova célula.
+    aux.item ← x                          // Armazena o item 'x' na nova célula.
+    aux.prox ← pilha.topo                 // Nova célula aponta para o topo atual.
+    pilha.topo ← aux                      // Atualiza o topo para a nova célula.
+    pilha.tamanho ← pilha.tamanho + 1     // Incrementa o tamanho da pilha.
+FimProcedimento
+
+// Função que desempilha o item do topo da pilha.
+Função desempilha(var pilha: TipoPilha): TipoItem
+    var q: Apontador             // Ponteiro auxiliar para a célula a ser removida.
+    var item: TipoItem           // Variável para armazenar o item removido.
+
+    se vazia(pilha) então
+        escrever "Erro: pilha vazia"   // Mensagem de erro.
+        item.chave ← -1                // Valor indicador de erro.
+        retornar item                  // Retorna o item com chave inválida.
+    senão
+        q ← pilha.topo                 // 'q' aponta para o topo atual.
+        pilha.topo ← q.prox            // Atualiza o topo para o próximo elemento.
+        item ← q.item                  // Copia o item da célula removida.
+        liberar q                      // Libera a memória da célula removida.
+        pilha.tamanho ← pilha.tamanho - 1  // Decrementa o tamanho da pilha.
+        retornar item                  // Retorna o item removido.
+    fim se
+FimFunção
+
+// Função que retorna o tamanho atual da pilha.
+Função tamanho(pilha: TipoPilha): Inteiro
+    retornar pilha.tamanho  // Retorna o campo 'tamanho' da estrutura da pilha.
+FimFunção
+
+// Programa principal para demonstração.
+Algoritmo Principal
+    var pilha: TipoPilha
+    var item: TipoItem
+
+    FPVazia(pilha)  // Inicializa a pilha.
+
+    // Empilha alguns itens.
+    item.chave ← 10
+    empilha(item, pilha)
+
+    item.chave ← 20
+    empilha(item, pilha)
+
+    // Verifica o tamanho da pilha.
+    escrever "Tamanho da pilha: ", tamanho(pilha)
+
+    // Desempilha um item.
+    item ← desempilha(pilha)
+    escrever "Item desempilhado: ", item.chave
+
+    // Verifica se a pilha está vazia.
+    se vazia(pilha) então
+        escrever "A pilha está vazia."
+    senão
+        escrever "A pilha não está vazia."
+    fim se
+
+    // Libera a célula cabeça restante.
+    liberar pilha.topo
+
+FimAlgoritmo
