@@ -3,6 +3,7 @@ Tipo TipoItem {
     inteiro valor
 }
 
+
 // Definição da estrutura para a lista
 Tipo TipoLista {
     TipoItem item[maxtam]
@@ -10,16 +11,42 @@ Tipo TipoLista {
     inteiro ultimo
 }
 
+------------------------------------------------------------------------------------------------------------
+
+
+//Entrada: lista (uma instância de TipoLista)
+//Saída: lista inicializada como uma lista vazia
+//Pré-condição: lista é definida
+//Pós-condição: lista é definida e vazia, com primeiro e ultimo apontando para o início da lista
+//Vazia(lista):
+
 // Inicializa uma lista vazia
 Função FLVazia(lista: TipoLista) {
     lista.primeiro <- 0
     lista.ultimo <- lista.primeiro
 }
 
+------------------------------------------------------------------------------------------------------------
+
+
+//Entrada: lista (uma instância de TipoLista)
+//Saída: booleano (retorna true se a lista estiver vazia, caso contrário, retorna false)
+//Pré-condição: lista é definida
+//Pós-condição: lista não é modificada
+//Insere(x, lista):
+
 // Verifica se a lista está vazia
 Função Vazia(lista: TipoLista) -> booleano {
     Retorne (lista.primeiro == lista.ultimo)
 }
+
+------------------------------------------------------------------------------------------------------------
+
+//Entrada: x (um item de TipoItem), lista (uma instância de TipoLista)
+//Saída: lista com x inserido após o último elemento
+//Pré-condição: lista é definida e x é um item válido
+//Pós-condição: lista é atualizada para incluir o novo item x, e ultimo é incrementado
+//Retira(p, lista):
 
 // Insere um item após o último elemento da lista
 Função Insere(x: TipoItem, lista: TipoLista) {
@@ -30,6 +57,14 @@ Função Insere(x: TipoItem, lista: TipoLista) {
         lista.ultimo <- lista.ultimo + 1
     Fim Se
 }
+
+------------------------------------------------------------------------------------------------------------
+
+
+//Entrada: p (posição válida na lista), lista (uma instância de TipoLista)
+//Saída: O item da lista na posição p
+//Pré-condição: lista é definida e p é uma posição válida
+//Pós-condição: A lista é atualizada para remover o item na posição p, e todos os itens subsequentes são deslocados para a esquerda. O item //removido é retornado.
 
 // Remove e retorna o item na posição p da lista
 Função Retira(p: inteiro, lista: TipoLista) -> TipoItem {
@@ -48,28 +83,25 @@ Função Retira(p: inteiro, lista: TipoLista) -> TipoItem {
 
     Retorne item
 }
-Explicações
-FLVazia(lista):
 
-Entrada: lista (uma instância de TipoLista)
-Saída: lista inicializada como uma lista vazia
-Pré-condição: lista é definida
-Pós-condição: lista é definida e vazia, com primeiro e ultimo apontando para o início da lista
-Vazia(lista):
+------------------------------------------------------------------------------------------------------------
 
-Entrada: lista (uma instância de TipoLista)
-Saída: booleano (retorna true se a lista estiver vazia, caso contrário, retorna false)
-Pré-condição: lista é definida
-Pós-condição: lista não é modificada
-Insere(x, lista):
 
-Entrada: x (um item de TipoItem), lista (uma instância de TipoLista)
-Saída: lista com x inserido após o último elemento
-Pré-condição: lista é definida e x é um item válido
-Pós-condição: lista é atualizada para incluir o novo item x, e ultimo é incrementado
-Retira(p, lista):
+// Função: Imprime os itens da lista na ordem de ocorrência
+// Entrada: L (Lista)
+// Saída: Nenhuma (apenas imprime os elementos da lista)
+// Pré-condição: L é definida e não está vazia
+// Pós-condição: L não é modificada e seus elementos são impressos
 
-Entrada: p (posição válida na lista), lista (uma instância de TipoLista)
-Saída: O item da lista na posição p
-Pré-condição: lista é definida e p é uma posição válida
-Pós-condição: A lista é atualizada para remover o item na posição p, e todos os itens subsequentes são deslocados para a esquerda. O item removido é retornado.
+Imprime(Lista)
+    Exibir "p - key"  // Cabeçalho para exibição
+
+    Para aux de Lista.primeiro até Lista.ultimo - 1 faça:
+        Exibir aux, "-", Lista.item[aux].valor  // Imprime o índice e o valor correspondente
+    FimPara
+
+FimFunção
+
+
+
+
