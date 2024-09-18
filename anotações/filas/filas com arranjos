@@ -155,10 +155,27 @@ PROCEDIMENTO FFVazia(Fila: REFERENCIA TipoFila)
     Fila.tras <- 0    // Inicializa o ponteiro tras na mesma posição, indicando fila vazia
 FIM PROCEDIMENTO
 
+// Explicação do Procedimento FFVazia:
+// Este procedimento inicializa a fila para um estado vazio.
+// - **Fila.frente <- 0:** Define o ponteiro "frente" na posição inicial do array (índice 0). Este ponteiro indica a posição do próximo item a ser removido (desenfileirado) da fila.
+// - **Fila.tras <- 0:** Define o ponteiro "tras" na mesma posição (índice 0). Este ponteiro indica a posição onde o próximo item será inserido (enfileirado).
+// - Inicializar ambos os ponteiros na mesma posição (0) indica que a fila está vazia, ou seja, não há elementos entre "frente" e "tras".
+// - Ao começar com ambos os ponteiros em 0, este procedimento prepara a fila para futuras operações de enfileiramento e desenfileiramento, garantindo que as operações comecem a partir da posição inicial do array.
+
 // Função que verifica se a fila está vazia
 FUNÇÃO Vazia(Fila: TipoFila): BOOLEANO
     RETORNAR (Fila.frente = Fila.tras)  // Se frente e tras são iguais, a fila está vazia
 FIM FUNÇÃO
+
+// Explicação da Função Vazia:
+// Esta função verifica se a fila está vazia.
+// - **Retornar (Fila.frente = Fila.tras):** Compara os ponteiros "frente" e "tras". Se ambos são iguais, significa que não há elementos na fila.
+// - Quando "frente" e "tras" apontam para a mesma posição, indica que nenhum elemento foi enfileirado ou todos os elementos enfileirados foram removidos.
+// - A função retorna um valor booleano:
+//   - **Verdadeiro:** Indica que a fila está vazia.
+//   - **Falso:** Indica que há pelo menos um elemento na fila.
+// - Esta verificação é essencial antes de realizar operações de desenfileiramento para evitar erros ao tentar remover um item de uma fila vazia.
+
 
 // Função para inserir um item na fila (Enfileirar)
 FUNÇÃO Enfileira(x: TipoItem, Fila: REFERENCIA TipoFila): INTEIRO
