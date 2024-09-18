@@ -136,6 +136,23 @@ Procedimento FPVazia(var pilha: TipoPilha)
     pilha.topo ← 0  // Define o topo como 0, indicando que a pilha está vazia
 FimProcedimento
 
+// Explicação:
+// O procedimento `FPVazia` inicializa a pilha para um estado vazio, configurando o topo como 0.
+// Isso indica que a pilha está vazia e pronta para receber novos elementos.
+// A pilha é implementada como um vetor (arranjo), onde `topo` representa o índice da próxima posição livre no vetor.
+// Inicializando `topo` como 0, indicamos que não há elementos na pilha no momento.
+
+// Funcionamento:
+// - `pilha.topo ← 0`: Define a posição inicial para a inserção de elementos no vetor.
+
+// Importância:
+// - A inicialização é crucial para garantir que as operações subsequentes (empilhar e desempilhar) funcionem corretamente.
+// - Definir `topo` como 0 estabelece a base para o controle do tamanho da pilha e sua integridade.
+
+// Exemplo de uso:
+// FPVazia(pilha)
+// escrever "Pilha inicializada."
+
 
 
 
@@ -144,6 +161,26 @@ Função vazia(pilha: TipoPilha): Booleano
     retornar (pilha.topo = 0)  // Retorna verdadeiro se o topo for 0
 FimFunção
 
+// Explicação:
+// A função `vazia` verifica se a pilha não contém elementos, retornando um valor booleano.
+// Ela faz isso comparando o valor do `topo` com 0.
+// Se `topo` for 0, significa que nenhum elemento foi empilhado.
+
+// Funcionamento:
+// - `retornar (pilha.topo = 0)`:
+//   - Retorna verdadeiro se `topo` for igual a 0, indicando que a pilha está vazia.
+//   - Retorna falso se `topo` for diferente de 0, indicando que há elementos na pilha.
+
+// Importância:
+// - Saber se a pilha está vazia é fundamental para evitar operações inválidas, como tentar desempilhar quando não há elementos.
+// - Ajuda a manter a integridade da pilha, prevenindo erros de execução.
+
+// Exemplo de uso:
+// se vazia(pilha) então
+//     escrever "A pilha está vazia."
+// senão
+//     escrever "A pilha contém elementos."
+// fim se
 
 
 
@@ -158,6 +195,36 @@ Procedimento empilha(x: TipoItem, var pilha: TipoPilha)
     fim se
 FimProcedimento
 
+// Explicação:
+// O procedimento `empilha` adiciona um novo item ao topo da pilha.
+// A pilha é implementada usando um vetor, e `topo` indica a próxima posição livre para inserir o item.
+// Antes de adicionar um novo item, verifica se a pilha está cheia.
+
+// Passo a Passo:
+// 1. **Verificação de Capacidade**:
+//    - `se pilha.topo = MAXTAM então`
+//    - Verifica se `topo` alcançou o limite máximo (`MAXTAM`), o que indica que a pilha está cheia.
+//    - Se a pilha estiver cheia, exibe uma mensagem de erro e não adiciona o novo item.
+
+// 2. **Inserção do Novo Item**:
+//    - `pilha.item[pilha.topo] ← x`
+//    - Insere o novo item na posição indicada por `topo`.
+//    - Coloca o item na posição atual do vetor representando o topo da pilha.
+
+// 3. **Atualização do Topo**:
+//    - `pilha.topo ← pilha.topo + 1`
+//    - Incrementa o `topo` para apontar para a próxima posição livre.
+//    - Isso mantém a integridade da pilha, preparando-a para a próxima operação de empilhamento.
+
+// Importância:
+// - Garante que os itens sejam empilhados no topo e a ordem LIFO (Last In, First Out) da pilha seja mantida.
+// - Evita a inserção além da capacidade máxima do vetor, protegendo a memória.
+
+// Exemplo de uso:
+// var item: TipoItem
+// item.chave ← 42
+// empilha(item, pilha)
+// escrever "Item empilhado com sucesso."
 
 
 
@@ -174,6 +241,44 @@ Função desempilha(var pilha: TipoPilha): TipoItem
     fim se
 FimFunção
 
+// Explicação:
+// A função `desempilha` remove o item do topo da pilha e o retorna.
+// Ela decrementa o valor de `topo` para acessar o item no topo do vetor.
+// Se a pilha estiver vazia, a função retorna um item com um valor inválido para indicar o erro.
+
+// Passo a Passo:
+// 1. **Verificação se a Pilha Está Vazia**:
+//    - `se vazia(pilha) então`
+//    - Usa a função `vazia` para verificar se a pilha contém elementos.
+//    - Se estiver vazia, exibe uma mensagem de erro e define um valor inválido para retornar.
+
+// 2. **Retorno de Erro para Pilha Vazia**:
+//    - `itemVazio.chave ← -1`
+//    - Retorna um item com chave inválida (`-1`) para sinalizar que a operação falhou porque a pilha estava vazia.
+
+// 3. **Desempilhamento do Item**:
+//    - `pilha.topo ← pilha.topo - 1`
+//    - Decrementa o `topo` para apontar para o item atualmente no topo da pilha.
+//    - Isso efetivamente "remove" o item do topo, pois o próximo empilhamento sobrescreverá essa posição.
+
+// 4. **Retorno do Item Removido**:
+//    - `retornar pilha.item[pilha.topo]`
+//    - Retorna o item na posição atual do `topo`.
+//    - Permite que a função chamadora acesse o valor do item que foi removido.
+
+// Importância:
+// - A função `desempilha` é essencial para manter a funcionalidade LIFO da pilha.
+// - A verificação se a pilha está vazia antes de desempilhar evita operações inválidas.
+
+// Exemplo de uso:
+// var item: TipoItem
+// item ← desempilha(pilha)
+// se item.chave = -1 então
+//     escrever "Erro ao desempilhar."
+// senão
+//     escrever "Item desempilhado com chave: ", item.chave
+// fim se
+
 
 
 
@@ -181,4 +286,23 @@ FimFunção
 Função tamanho(pilha: TipoPilha): Inteiro
     retornar pilha.topo  // Retorna o valor do topo, que indica o tamanho
 FimFunção
+
+// Explicação:
+// A função `tamanho` retorna o número de elementos atualmente na pilha.
+// Como a pilha é implementada usando um vetor, o valor de `topo` representa o número de elementos armazenados.
+
+// Funcionamento:
+// - `retornar pilha.topo`:
+//   - Retorna o valor atual de `topo`.
+//   - Como `topo` é incrementado a cada operação de empilhamento e decrementado a cada desempilhamento,
+//     ele reflete o número total de elementos na pilha.
+
+// Importância:
+// - A função `tamanho` permite que a função chamadora saiba quantos elementos estão na pilha a qualquer momento.
+// - Isso é útil para controle de fluxo e para evitar operações que excedam os limites da pilha.
+
+// Exemplo de uso:
+// var tamanhoAtual: Inteiro
+// tamanhoAtual ← tamanho(pilha)
+// escrever "A pilha contém ", tamanhoAtual, " elementos."
 
