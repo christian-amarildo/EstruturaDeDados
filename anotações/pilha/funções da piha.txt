@@ -1,6 +1,6 @@
---------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 CODIGOS EM C++
-
+-----------------------------------------------------------------------------------------------------------
 Operações sobre Pilhas Usando Arranjos
 
 #include <stdio.h>
@@ -18,15 +18,21 @@ typedef struct {
     int topo;               // Índice que representa o topo da pilha.
 } TipoPilha;                // Estrutura que representa a pilha.
 
+
+
 // Função que inicializa a pilha vazia.
 void FPVazia(TipoPilha *pilha) {
     pilha->topo = 0;  // Define o topo como 0, indicando que a pilha está vazia.
 }
 
+
+
 // Função que verifica se a pilha está vazia.
 int vazia(TipoPilha *pilha) {
     return (pilha->topo == 0);  // Retorna verdadeiro se o topo for 0.
 }
+
+
 
 // Procedimento que empilha um item no topo da pilha.
 void empilha(TipoItem x, TipoPilha *pilha) {
@@ -37,6 +43,8 @@ void empilha(TipoItem x, TipoPilha *pilha) {
         pilha->topo++;                 // Incrementa o topo.
     }
 }
+
+
 
 // Função que desempilha o item do topo da pilha.
 TipoItem desempilha(TipoPilha *pilha) {
@@ -51,10 +59,16 @@ TipoItem desempilha(TipoPilha *pilha) {
     }
 }
 
+
+
+
 // Função que retorna o tamanho atual da pilha.
 int tamanho(TipoPilha *pilha) {
     return pilha->topo;  // Retorna o valor do topo, que indica o tamanho.
 }
+
+
+
 
 // Programa de exemplo de uso da pilha.
 int main() {
@@ -86,6 +100,9 @@ int main() {
 
     return 0;
 }
+
+
+
 --------------------------------------------------------------------------------------------------
 Impelementação de Pilhas por
 meio de Apontadores ou lista encadeada
@@ -112,6 +129,9 @@ typedef struct {
     int tamanho;        // Tamanho atual da pilha.
 } TipoPilha;            // Estrutura que representa a pilha.
 
+
+
+
 // Função que inicializa a pilha vazia.
 void FPVazia(TipoPilha *pilha) {
     // Aloca memória para a célula cabeça.
@@ -121,11 +141,17 @@ void FPVazia(TipoPilha *pilha) {
     pilha->tamanho = 0;                // Inicializa o tamanho da pilha com zero.
 }
 
+
+
+
 // Função que verifica se a pilha está vazia.
 int vazia(TipoPilha *pilha) {
     // A pilha está vazia se o topo e o fundo apontam para a mesma célula.
     return (pilha->topo == pilha->fundo);
 }
+
+
+
 
 // Procedimento que empilha um item no topo da pilha.
 void empilha(TipoItem x, TipoPilha *pilha) {
@@ -136,6 +162,9 @@ void empilha(TipoItem x, TipoPilha *pilha) {
     pilha->topo = aux;                           // Atualiza o topo para a nova célula.
     pilha->tamanho++;                            // Incrementa o tamanho da pilha.
 }
+
+
+
 
 // Função que desempilha o item do topo da pilha.
 TipoItem desempilha(TipoPilha *pilha) {
@@ -157,10 +186,16 @@ TipoItem desempilha(TipoPilha *pilha) {
     }
 }
 
+
+
+
 // Função que retorna o tamanho atual da pilha.
 int tamanho(TipoPilha *pilha) {
     return pilha->tamanho;  // Retorna o campo 'tamanho' da estrutura da pilha.
 }
+
+
+
 
 // Programa de exemplo de uso da pilha.
 int main() {
@@ -196,3 +231,113 @@ int main() {
     return 0;
 }
 
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------
+CODIGOS EM PSEUDOCODIGO
+-----------------------------------------------------------------------------------------------------------
+PILHA COM ARRANJOS
+-----------------------------------------------------------------------------------------------------------
+// Definição de constantes e tipos
+Constante MAXTAM = 1000  // Tamanho máximo da pilha
+
+Tipo TipoChave é Inteiro  // Define 'TipoChave' como um inteiro
+
+Tipo TipoItem
+    chave: TipoChave      // Campo 'chave' do tipo 'TipoChave'
+FimTipo
+
+Tipo TipoPilha
+    item: Vetor[0..MAXTAM - 1] de TipoItem  // Vetor que armazena os itens da pilha
+    topo: Inteiro                           // Índice que representa o topo da pilha
+FimTipo
+
+
+
+
+// Procedimento que inicializa a pilha vazia
+Procedimento FPVazia(var pilha: TipoPilha)
+    pilha.topo ← 0  // Define o topo como 0, indicando que a pilha está vazia
+FimProcedimento
+
+
+
+
+// Função que verifica se a pilha está vazia
+Função vazia(pilha: TipoPilha): Booleano
+    retornar (pilha.topo = 0)  // Retorna verdadeiro se o topo for 0
+FimFunção
+
+
+
+
+
+// Procedimento que empilha um item no topo da pilha
+Procedimento empilha(x: TipoItem, var pilha: TipoPilha)
+    se pilha.topo = MAXTAM então
+        escrever "Erro: pilha está cheia"  // Mensagem de erro se a pilha estiver cheia
+    senão
+        pilha.item[pilha.topo] ← x         // Insere o item no topo da pilha
+        pilha.topo ← pilha.topo + 1        // Incrementa o topo
+    fim se
+FimProcedimento
+
+
+
+
+
+// Função que desempilha o item do topo da pilha
+Função desempilha(var pilha: TipoPilha): TipoItem
+    se vazia(pilha) então
+        escrever "Erro: a pilha está vazia"  // Mensagem de erro se a pilha estiver vazia
+        itemVazio.chave ← -1                 // Valor indicador de erro
+        retornar itemVazio
+    senão
+        pilha.topo ← pilha.topo - 1          // Decrementa o topo
+        retornar pilha.item[pilha.topo]      // Retorna o item do topo
+    fim se
+FimFunção
+
+
+
+
+// Função que retorna o tamanho atual da pilha
+Função tamanho(pilha: TipoPilha): Inteiro
+    retornar pilha.topo  // Retorna o valor do topo, que indica o tamanho
+FimFunção
+
+
+
+
+
+// Programa principal para demonstração
+Algoritmo Principal
+    var pilha: TipoPilha
+    var item: TipoItem
+
+    FPVazia(pilha)  // Inicializa a pilha
+
+    // Empilha alguns itens
+    item.chave ← 10
+    empilha(item, pilha)
+
+    item.chave ← 20
+    empilha(item, pilha)
+
+    // Verifica o tamanho da pilha
+    escrever "Tamanho da pilha: ", tamanho(pilha)
+
+    // Desempilha um item
+    item ← desempilha(pilha)
+    escrever "Item desempilhado: ", item.chave
+
+    // Verifica se a pilha está vazia
+    se vazia(pilha) então
+        escrever "A pilha está vazia."
+    senão
+        escrever "A pilha não está vazia."
+    fim se
+FimAlgoritmo
