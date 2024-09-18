@@ -1,9 +1,11 @@
 ### Filas (Queues)
 
-As filas são estruturas de dados lineares em que a ordem de inserção dos elementos determina a ordem de remoção. Elas seguem o princípio **FIFO** (First-In, First-Out), ou seja, o primeiro elemento inserido é o primeiro a ser removido.
+As filas são estruturas de dados lineares em que a ordem de inserção dos elementos determina a ordem de remoção. 
+Elas seguem o princípio **FIFO** (First-In, First-Out), ou seja, o primeiro elemento inserido é o primeiro a ser removido.
 
 #### Analogia:
-Pense em uma fila de espera em um caixa de supermercado. A pessoa que está no início da fila é atendida primeiro, enquanto as novas pessoas que chegam entram no final da fila.
+Pense em uma fila de espera em um caixa de supermercado. A pessoa que está no início da fila é atendida primeiro, 
+enquanto as novas pessoas que chegam entram no final da fila.
 
 ---
 
@@ -25,10 +27,12 @@ Pense em uma fila de espera em um caixa de supermercado. A pessoa que está no i
   - Remove o elemento do início da fila.
 
 #### Problema Comum:
-À medida que elementos são inseridos no final e removidos do início, a fila tende a "mover-se" para frente na memória. Isso pode levar a um problema onde a fila atinge o limite do espaço alocado, mesmo que existam espaços livres no início do array.
+À medida que elementos são inseridos no final e removidos do início, a fila tende a "mover-se" para frente na memória.
+Isso pode levar a um problema onde a fila atinge o limite do espaço alocado, mesmo que existam espaços livres no início do array.
 
 #### Solução:
-Para resolver esse problema, podemos tratar o array como se fosse circular. Isso significa que, quando o final da fila atinge o final do array, ele "envolve" e começa novamente a partir do início do array, se houver espaço disponível.
+Para resolver esse problema, podemos tratar o array como se fosse circular. Isso significa que, 
+quando o final da fila atinge o final do array, ele "envolve" e começa novamente a partir do início do array, se houver espaço disponível.
 
 ---
 
@@ -54,13 +58,56 @@ Em uma fila circular, a primeira posição do array segue a última, formando um
   - Evita o desperdício de espaço na memória, já que o espaço no início do array pode ser reutilizado quando o final da fila atinge o limite.
 
 - **Operações Constantes:**
-  - Tanto as operações de enfileirar quanto as de desenfileirar são realizadas em tempo constante O(1), pois apenas envolvem a movimentação de apontadores e, no máximo, a atualização de índices.
+  - Tanto as operações de enfileirar quanto as de desenfileirar são realizadas em tempo constante O(1),
+pois apenas envolvem a movimentação de apontadores e, no máximo, a atualização de índices.
 
 ---
 
-### Visualização
+------------------------------------------------------------------------------------
+CODIGO EM C++
+------------------------------------------------------------------------------------
 
-Imagine um array com índices de 0 a 4. Uma fila circular começando no índice 0 e terminando no índice 4 envolverá o "Trás" de volta para o início do array quando for enfileirado um novo elemento e "Trás" já estiver na posição 4.
+#define MAXTAM 1000
+typedef int TipoApontador;
+typedef int TipoChave;
+typedef struct{
+TipoChave Chave{
+}tipoitem;
 
-#### Exemplo de movimentação em uma fila circular:
+typedef struct{
+tipoitem item[maxtam];
+tipoapontador frente, tras;
+} TipoFila;
+
+
+void FFVazia (TipoFila *Fila){
+  Fila->Frente = 0;
+  Fila->Tras = Fila->Frete;
+} 
+
+  int Vazia(TipoFila *Fila){
+return (Fila->Frente == Fila->Tras);}
+
+int Enfileira(TipoItem x, TipoFila *Fila){
+if ((Fila->Tras + 1) % MaxTam == Fila->Frente){
+printf("erro: fila está cheia"); return 0;
+}
+else {
+fila->item[fila->tras] = x ;
+fila-> tras = (fila->tras + 1) % MaxTam;
+}
+return 1;
+}
+
+TipoItem Desenfileira(TipoFila *Fila) {
+if (Vazia(Fila)) {
+printf("Erro: fila está vazia"); ERRO;
+}
+else {
+int idx = Fila->Frente;
+Fila->Frente = (Fila->Frente + 1) % MaxTam;
+return Fila->Item[idx];
+}
+}
+
 
