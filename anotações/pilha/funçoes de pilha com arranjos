@@ -182,35 +182,3 @@ Função tamanho(pilha: TipoPilha): Inteiro
     retornar pilha.topo  // Retorna o valor do topo, que indica o tamanho
 FimFunção
 
-
-
-
-
-// Programa principal para demonstração
-Algoritmo Principal
-    var pilha: TipoPilha
-    var item: TipoItem
-
-    FPVazia(pilha)  // Inicializa a pilha
-
-    // Empilha alguns itens
-    item.chave ← 10
-    empilha(item, pilha)
-
-    item.chave ← 20
-    empilha(item, pilha)
-
-    // Verifica o tamanho da pilha
-    escrever "Tamanho da pilha: ", tamanho(pilha)
-
-    // Desempilha um item
-    item ← desempilha(pilha)
-    escrever "Item desempilhado: ", item.chave
-
-    // Verifica se a pilha está vazia
-    se vazia(pilha) então
-        escrever "A pilha está vazia."
-    senão
-        escrever "A pilha não está vazia."
-    fim se
-FimAlgoritmo
