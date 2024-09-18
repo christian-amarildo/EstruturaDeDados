@@ -161,6 +161,8 @@ FimTipo
 
 
 
+
+
 // Procedimento que inicializa a pilha vazia.
 Procedimento FPVazia(var pilha: TipoPilha)
     pilha.topo ← novo Celula       // Aloca memória para a célula cabeça.
@@ -199,6 +201,8 @@ FimProcedimento
 
 
 
+
+
 // Função que verifica se a pilha está vazia.
 Função vazia(pilha: TipoPilha): Booleano
     retornar (pilha.topo = pilha.fundo)  // A pilha está vazia se topo e fundo são iguais.
@@ -223,6 +227,8 @@ FimFunção
 // senão
 //     escrever "A pilha contém elementos."
 // fim se
+
+
 
 
 
@@ -268,6 +274,9 @@ FimProcedimento
 // 6. **Incremento do tamanho da pilha**:
 //    - `pilha.tamanho ← pilha.tamanho + 1`
 //    - Atualiza o contador de elementos na pilha.
+
+
+
 
 
 
