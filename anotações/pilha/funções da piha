@@ -1,1 +1,71 @@
+#include <stdio.h>
+#include <stdlib.h>
 
+typedef int TipoChave;  // Define 'TipoChave' como um inteiro.
+
+typedef struct {
+    TipoChave chave;    // Campo 'chave' do tipo 'TipoChave'.
+} TipoItem;             // Estrutura que representa o item armazenado na pilha.
+
+typedef struct Celula *Apontador;  // Define 'Apontador' como um ponteiro para 'Celula'.
+
+typedef struct Celula {
+    TipoItem item;      // Item armazenado na célula.
+    Apontador prox;     // Ponteiro para a próxima célula (nó) da pilha.
+} Celula;               // Estrutura da célula que compõe a pilha.
+
+typedef struct {
+    Apontador topo;     // Ponteiro para o topo da pilha.
+    Apontador fundo;    // Ponteiro para o fundo da pilha (célula base).
+    int tamanho;        // Tamanho atual da pilha.
+} TipoPilha;            // Estrutura que representa a pilha.
+
+// Função que inicializa a pilha vazia.
+void FPVazia(TipoPilha *pilha) {
+    // Aloca memória para a célula cabeça.
+    pilha->topo = (Apontador) malloc(sizeof(Celula));
+    pilha->fundo = pilha->topo;        // 'fundo' aponta para a célula cabeça.
+    pilha->topo->prox = NULL;          // Próximo do topo é NULL, indicando fim da pilha.
+    pilha->tamanho = 0;                // Inicializa o tamanho da pilha com zero.
+}
+
+// Função que verifica se a pilha está vazia.
+int vazia(TipoPilha *pilha) {
+    // A pilha está vazia se o topo e o fundo apontam para a mesma célula.
+    return (pilha->topo == pilha->fundo);
+}
+
+// Procedimento que empilha um item no topo da pilha.
+void empilha(TipoItem x, TipoPilha *pilha) {
+    Apontador aux;                               // Declara um ponteiro auxiliar.
+    aux = (Apontador) malloc(sizeof(Celula));    // Aloca memória para a nova célula.
+    aux->item = x;                               // Armazena o item 'x' na nova célula.
+    aux->prox = pilha->topo;                     // Nova célula aponta para o topo atual.
+    pilha->topo = aux;                           // Atualiza o topo para a nova célula.
+    pilha->tamanho++;                            // Incrementa o tamanho da pilha.
+}
+
+// Função que desempilha o item do topo da pilha.
+TipoItem desempilha(TipoPilha *pilha) {
+    Apontador q;             // Ponteiro auxiliar para a célula a ser removida.
+    TipoItem item;           // Variável para armazenar o item removido.
+
+    // Verifica se a pilha está vazia.
+    if (vazia(pilha)) {
+        printf("Erro: pilha vazia\n");   // Mensagem de erro.
+        item.chave = -1;                 // Valor indicador de erro.
+        return item;                     // Retorna o item com chave inválida.
+    } else {
+        q = pilha->topo;                 // 'q' aponta para o topo atual.
+        pilha->topo = q->prox;           // Atualiza o topo para o próximo elemento.
+        item = q->item;                  // Copia o item da célula removida.
+        free(q);                         // Libera a memória da célula removida.
+        pilha->tamanho--;                // Decrementa o tamanho da pilha.
+        return item;                     // Retorna o item removido.
+    }
+}
+
+// Função que retorna o tamanho atual da pilha.
+int tamanho(TipoPilha *pilha) {
+    return pilha->tamanho;  // Retorna o campo 'tamanho' da estrutura da pilha.
+}
