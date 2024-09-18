@@ -1,6 +1,95 @@
 --------------------------------------------------------------------------------------------------
 CODIGOS EM C++
 
+Operações sobre Pilhas Usando Arranjos
+
+#include <stdio.h>
+
+#define MAXTAM 1000  // Define o tamanho máximo da pilha.
+
+typedef int TipoChave;  // Define 'TipoChave' como um inteiro.
+
+typedef struct {
+    TipoChave chave;  // Campo 'chave' do tipo 'TipoChave'.
+} TipoItem;           // Estrutura que representa o item armazenado na pilha.
+
+typedef struct {
+    TipoItem item[MAXTAM];  // Array de itens que compõem a pilha.
+    int topo;               // Índice que representa o topo da pilha.
+} TipoPilha;                // Estrutura que representa a pilha.
+
+// Função que inicializa a pilha vazia.
+void FPVazia(TipoPilha *pilha) {
+    pilha->topo = 0;  // Define o topo como 0, indicando que a pilha está vazia.
+}
+
+// Função que verifica se a pilha está vazia.
+int vazia(TipoPilha *pilha) {
+    return (pilha->topo == 0);  // Retorna verdadeiro se o topo for 0.
+}
+
+// Procedimento que empilha um item no topo da pilha.
+void empilha(TipoItem x, TipoPilha *pilha) {
+    if (pilha->topo == MAXTAM) {
+        printf("Erro: pilha está cheia\n");  // Mensagem de erro se a pilha estiver cheia.
+    } else {
+        pilha->item[pilha->topo] = x;  // Insere o item no topo da pilha.
+        pilha->topo++;                 // Incrementa o topo.
+    }
+}
+
+// Função que desempilha o item do topo da pilha.
+TipoItem desempilha(TipoPilha *pilha) {
+    if (vazia(pilha)) {
+        printf("Erro: a pilha está vazia\n");  // Mensagem de erro se a pilha estiver vazia.
+        TipoItem itemVazio;
+        itemVazio.chave = -1;  // Valor indicador de erro.
+        return itemVazio;
+    } else {
+        pilha->topo--;                         // Decrementa o topo.
+        return pilha->item[pilha->topo];       // Retorna o item do topo.
+    }
+}
+
+// Função que retorna o tamanho atual da pilha.
+int tamanho(TipoPilha *pilha) {
+    return pilha->topo;  // Retorna o valor do topo, que indica o tamanho.
+}
+
+// Programa de exemplo de uso da pilha.
+int main() {
+    TipoPilha pilha;
+    TipoItem item;
+
+    FPVazia(&pilha);  // Inicializa a pilha.
+
+    // Empilha alguns itens.
+    item.chave = 10;
+    empilha(item, &pilha);
+
+    item.chave = 20;
+    empilha(item, &pilha);
+
+    // Verifica o tamanho da pilha.
+    printf("Tamanho da pilha: %d\n", tamanho(&pilha));
+
+    // Desempilha um item.
+    item = desempilha(&pilha);
+    printf("Item desempilhado: %d\n", item.chave);
+
+    // Verifica se a pilha está vazia.
+    if (vazia(&pilha)) {
+        printf("A pilha está vazia.\n");
+    } else {
+        printf("A pilha não está vazia.\n");
+    }
+
+    return 0;
+}
+--------------------------------------------------------------------------------------------------
+Impelementação de Pilhas por
+meio de Apontadores ou lista encadeada
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -72,3 +161,38 @@ TipoItem desempilha(TipoPilha *pilha) {
 int tamanho(TipoPilha *pilha) {
     return pilha->tamanho;  // Retorna o campo 'tamanho' da estrutura da pilha.
 }
+
+// Programa de exemplo de uso da pilha.
+int main() {
+    TipoPilha pilha;
+    TipoItem item;
+
+    FPVazia(&pilha);  // Inicializa a pilha.
+
+    // Empilha alguns itens.
+    item.chave = 10;
+    empilha(item, &pilha);
+
+    item.chave = 20;
+    empilha(item, &pilha);
+
+    // Verifica o tamanho da pilha.
+    printf("Tamanho da pilha: %d\n", tamanho(&pilha));
+
+    // Desempilha um item.
+    item = desempilha(&pilha);
+    printf("Item desempilhado: %d\n", item.chave);
+
+    // Verifica se a pilha está vazia.
+    if (vazia(&pilha)) {
+        printf("A pilha está vazia.\n");
+    } else {
+        printf("A pilha não está vazia.\n");
+    }
+
+    // Libera a célula cabeça restante.
+    free(pilha.topo);
+
+    return 0;
+}
+
