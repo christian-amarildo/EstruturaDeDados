@@ -70,44 +70,61 @@ CODIGO EM C++
 #define MAXTAM 1000
 typedef int TipoApontador;
 typedef int TipoChave;
-typedef struct{
-TipoChave Chave{
-}tipoitem;
 
-typedef struct{
-tipoitem item[maxtam];
-tipoapontador frente, tras;
+// Definição do item da fila
+typedef struct {
+    TipoChave Chave;
+} TipoItem;
+
+// Definição da estrutura da fila
+typedef struct {
+    TipoItem item[MAXTAM];
+    TipoApontador frente, tras;
 } TipoFila;
 
-
-void FFVazia (TipoFila *Fila){
-  Fila->Frente = 0;
-  Fila->Tras = Fila->Frete;
-} 
-
-  int Vazia(TipoFila *Fila){
-return (Fila->Frente == Fila->Tras);}
-
-int Enfileira(TipoItem x, TipoFila *Fila){
-if ((Fila->Tras + 1) % MaxTam == Fila->Frente){
-printf("erro: fila está cheia"); return 0;
-}
-else {
-fila->item[fila->tras] = x ;
-fila-> tras = (fila->tras + 1) % MaxTam;
-}
-return 1;
+// Função para inicializar a fila vazia
+void FFVazia(TipoFila *Fila) {
+    Fila->Frente = 0;  // Inicializa o ponteiro frente na posição 0
+    Fila->Tras = 0;    // Inicializa o ponteiro tras na mesma posição, indicando fila vazia
 }
 
+// Função que verifica se a fila está vazia
+int Vazia(TipoFila *Fila) {
+    return (Fila->Frente == Fila->Tras);  // Se frente e tras são iguais, a fila está vazia
+}
+
+// Função para inserir um item na fila (Enfileirar)
+int Enfileira(TipoItem x, TipoFila *Fila) {
+    // Verifica se a fila está cheia
+    if ((Fila->Tras + 1) % MAXTAM == Fila->Frente) {
+        printf("Erro: fila está cheia"); 
+        return 0;  // Retorna 0 para indicar falha na inserção
+    } else {
+        // Insere o item na posição apontada por tras
+        Fila->item[Fila->Tras] = x;
+        // Move o ponteiro tras para a próxima posição circularmente
+        Fila->Tras = (Fila->Tras + 1) % MAXTAM;
+    }
+    return 1;  // Retorna 1 para indicar sucesso na inserção
+}
+
+// Função para remover um item da fila (Desenfileirar)
 TipoItem Desenfileira(TipoFila *Fila) {
-if (Vazia(Fila)) {
-printf("Erro: fila está vazia"); ERRO;
+    if (Vazia(Fila)) {
+        printf("Erro: fila está vazia\n"); 
+        // Retorna um item com chave -1 para indicar erro
+        TipoItem itemVazio;
+        itemVazio.Chave = -1;
+        return itemVazio;
+    } else {
+        // Armazena o índice do item a ser removido
+        int idx = Fila->Frente;
+        // Move o ponteiro frente para a próxima posição circularmente
+        Fila->Frente = (Fila->Frente + 1) % MAXTAM;
+        // Retorna o item removido
+        return Fila->item[idx];
+    }
 }
-else {
-int idx = Fila->Frente;
-Fila->Frente = (Fila->Frente + 1) % MaxTam;
-return Fila->Item[idx];
-}
-}
+
 
 
