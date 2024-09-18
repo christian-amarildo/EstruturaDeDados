@@ -157,3 +157,4 @@ Busca(chave, Lista)
     retornar encontrado
 Esta função procura por um elemento na lista cuja chave corresponda à chave fornecida. Ela retorna verdadeiro se encontrar o elemento, permitindo identificar a presença do item na lista.
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
