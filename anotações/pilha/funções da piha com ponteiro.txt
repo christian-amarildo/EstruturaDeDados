@@ -169,6 +169,33 @@ Procedimento FPVazia(var pilha: TipoPilha)
     pilha.tamanho ← 0              // Inicializa o tamanho da pilha com zero.
 FimProcedimento
 
+// Explicação:
+// O procedimento `FPVazia` tem como objetivo inicializar a pilha para um estado vazio. A seguir, cada linha é detalhada:
+
+1. **`pilha.topo ← novo Celula`**
+   - **Descrição**: Aloca memória para uma nova célula que servirá como a célula cabeça (sentinela) da pilha.
+   - **Significado**: A célula cabeça é um nó especial que não contém dados relevantes, mas facilita as operações na pilha, evitando a necessidade de tratar casos especiais quando a pilha está vazia.
+
+2. **`pilha.fundo ← pilha.topo`**
+   - **Descrição**: Configura o apontador `fundo` para apontar para a mesma célula que o `topo`.
+   - **Significado**: Quando a pilha está vazia, tanto o `topo` quanto o `fundo` apontam para a célula cabeça, indicando que não há elementos na pilha além dela.
+
+3. **`pilha.topo.prox ← nulo`**
+   - **Descrição**: Define o campo `prox` da célula cabeça como `nulo`.
+   - **Significado**: Isso indica que não há células após a célula cabeça, confirmando que a pilha está vazia.
+
+4. **`pilha.tamanho ← 0`**
+   - **Descrição**: Inicializa o tamanho da pilha com zero.
+   - **Significado**: O campo `tamanho` mantém o controle do número de elementos na pilha. Ao iniciar com zero, estamos indicando que nenhum elemento (além da célula cabeça) foi empilhado.
+
+**Resumo**:
+- Este procedimento configura a estrutura da pilha para um estado inicial vazio.
+- A utilização de uma célula cabeça simplifica as operações de empilhar e desempilhar, pois elimina a necessidade de verificar se a pilha está vazia em cada operação.
+- Os apontadores `topo` e `fundo` apontando para a célula cabeça, juntamente com o `prox` sendo `nulo`, estabelecem a base para uma pilha pronta para uso.
+- O tamanho zero reflete que não há elementos armazenados na pilha no momento da inicialização.
+
+
+
 
 
 
@@ -176,6 +203,28 @@ FimProcedimento
 Função vazia(pilha: TipoPilha): Booleano
     retornar (pilha.topo = pilha.fundo)  // A pilha está vazia se topo e fundo são iguais.
 FimFunção
+
+// Explicação:
+// A função `vazia` tem como objetivo verificar se a pilha está vazia.
+// Ela recebe a pilha (`pilha: TipoPilha`) como parâmetro e retorna um valor booleano.
+
+// Como funciona:
+// - Compara o apontador `pilha.topo` com `pilha.fundo`.
+// - Se ambos apontam para a mesma célula, significa que não há elementos na pilha além da célula cabeça (sentinela).
+// - Retorna `verdadeiro` se a pilha estiver vazia, ou `falso` caso contrário.
+
+// Importância:
+// - Essa verificação é essencial para evitar operações inválidas, como tentar desempilhar de uma pilha vazia.
+// - Garante a integridade das operações na pilha, permitindo que outras funções atuem de forma segura.
+
+// Exemplo de uso:
+// se vazia(pilha) então
+//     escrever "A pilha está vazia."
+// senão
+//     escrever "A pilha contém elementos."
+// fim se
+
+
 
 
 
@@ -189,6 +238,39 @@ Procedimento empilha(x: TipoItem, var pilha: TipoPilha)
     pilha.topo ← aux                      // Atualiza o topo para a nova célula.
     pilha.tamanho ← pilha.tamanho + 1     // Incrementa o tamanho da pilha.
 FimProcedimento
+
+// Explicação:
+// O procedimento `empilha` adiciona um novo item ao topo da pilha.
+// Recebe como parâmetros o item a ser empilhado (`x: TipoItem`) e a pilha (`var pilha: TipoPilha`).
+
+// Passo a passo:
+// 1. **Declaração do ponteiro auxiliar**:
+//    - `var aux: Apontador`
+//    - Serve para criar uma nova célula que será inserida na pilha.
+
+// 2. **Alocação de memória para a nova célula**:
+//    - `aux ← novo Celula`
+//    - Cria uma nova instância de `Celula` dinamicamente.
+
+// 3. **Armazenamento do item na nova célula**:
+//    - `aux.item ← x`
+//    - O item a ser empilhado é colocado no campo `item` da nova célula.
+
+// 4. **Ajuste do apontador `prox`**:
+//    - `aux.prox ← pilha.topo`
+//    - O campo `prox` da nova célula aponta para o antigo topo da pilha.
+//    - Isso mantém a ligação entre os elementos da pilha.
+
+// 5. **Atualização do topo da pilha**:
+//    - `pilha.topo ← aux`
+//    - O topo da pilha agora é a nova célula inserida.
+
+// 6. **Incremento do tamanho da pilha**:
+//    - `pilha.tamanho ← pilha.tamanho + 1`
+//    - Atualiza o contador de elementos na pilha.
+
+
+
 
 
 
@@ -211,6 +293,67 @@ Função desempilha(var pilha: TipoPilha): TipoItem
         retornar item                  // Retorna o item removido.
     fim se
 FimFunção
+
+// Explicação:
+// A função `desempilha` remove o item do topo da pilha e o retorna. Ela opera sobre a estrutura de dados da pilha, ajustando os apontadores e liberando a memória alocada para a célula removida.
+
+// Passo a Passo:
+
+1. **Declaração de Variáveis Auxiliares:**
+   - `var q: Apontador`
+     - Serve como ponteiro auxiliar para a célula que será removida.
+   - `var item: TipoItem`
+     - Armazena o item a ser removido da pilha.
+
+2. **Verificação se a Pilha Está Vazia:**
+   - `se vazia(pilha) então`
+     - Antes de remover um item, a função verifica se a pilha está vazia utilizando a função `vazia`.
+   - **Por quê?**
+     - Desempilhar de uma pilha vazia é uma operação inválida e pode causar erros se tentarmos acessar memória que não foi alocada para um elemento.
+
+3. **Tratamento de Erro para Pilha Vazia:**
+   - `escrever "Erro: pilha vazia"`
+     - Exibe uma mensagem de erro indicando que a pilha está vazia.
+   - `item.chave ← -1`
+     - Define um valor inválido para indicar que a operação de desempilhar falhou.
+   - `retornar item`
+     - Retorna um item com uma chave inválida para sinalizar que não houve remoção.
+
+4. **Remoção do Topo da Pilha (Caso Não Esteja Vazia):**
+   - `q ← pilha.topo`
+     - O ponteiro `q` é usado para armazenar a referência da célula atual do topo da pilha.
+   - `pilha.topo ← q.prox`
+     - Atualiza o topo da pilha para apontar para o próximo elemento, removendo a referência ao elemento atual do topo.
+     - Essencialmente, o topo da pilha "salta" para o próximo item, descartando o atual.
+   - `item ← q.item`
+     - Copia o item da célula que será removida para a variável `item`.
+   - `liberar q`
+     - Libera a memória alocada para a célula que foi removida.
+     - É importante liberar a memória para evitar vazamentos de memória, uma vez que a célula não será mais usada.
+   - `pilha.tamanho ← pilha.tamanho - 1`
+     - Decrementa o tamanho da pilha, pois um elemento foi removido.
+
+5. **Retorno do Item Removido:**
+   - `retornar item`
+     - Retorna o item removido para quem chamou a função, permitindo que seja utilizado ou processado.
+
+**Conceitos Envolvidos:**
+
+- **Desempilhamento (Pop):**
+  - A operação de remover o item do topo da pilha.
+  - É uma operação característica das pilhas, que segue a ordem LIFO (Last In, First Out).
+
+- **Lista Encadeada:**
+  - Neste contexto, a pilha é implementada como uma lista encadeada, onde cada elemento (nó) aponta para o próximo.
+  - O topo da pilha sempre aponta para o último elemento inserido.
+
+- **Gerenciamento de Memória Dinâmica:**
+  - A função inclui a liberação de memória da célula removida para evitar vazamento de memória.
+  - A memória é alocada dinamicamente ao empilhar e deve ser liberada ao desempilhar.
+
+- **Tratamento de Erros:**
+  - Verificar se a pilha está vazia antes de desempilhar previne operações inválidas.
+  - Retornar um item com uma chave indicadora de erro (`-1` neste caso) permite que a função chamadora saiba que a operação falhou.
 
 
 
