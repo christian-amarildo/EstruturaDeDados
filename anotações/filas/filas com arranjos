@@ -128,3 +128,68 @@ TipoItem Desenfileira(TipoFila *Fila) {
 
 
 
+
+------------------------------------------------------------------------------------
+CODIGO EM Pseudocódigo
+------------------------------------------------------------------------------------
+
+CONSTANTE MAXTAM <- 1000
+TIPO TipoApontador <- INTEIRO
+TIPO TipoChave <- INTEIRO
+
+// Definição do item da fila
+TIPO TipoItem
+    Chave: TipoChave
+FIM TIPO
+
+// Definição da estrutura da fila
+TIPO TipoFila
+    item: ARRAY[MAXTAM] DE TipoItem
+    frente: TipoApontador
+    tras: TipoApontador
+FIM TIPO
+
+// Procedimento para inicializar a fila vazia
+PROCEDIMENTO FFVazia(Fila: REFERENCIA TipoFila)
+    Fila.frente <- 0  // Inicializa o ponteiro frente na posição 0
+    Fila.tras <- 0    // Inicializa o ponteiro tras na mesma posição, indicando fila vazia
+FIM PROCEDIMENTO
+
+// Função que verifica se a fila está vazia
+FUNÇÃO Vazia(Fila: TipoFila): BOOLEANO
+    RETORNAR (Fila.frente = Fila.tras)  // Se frente e tras são iguais, a fila está vazia
+FIM FUNÇÃO
+
+// Função para inserir um item na fila (Enfileirar)
+FUNÇÃO Enfileira(x: TipoItem, Fila: REFERENCIA TipoFila): INTEIRO
+    // Verifica se a fila está cheia
+    SE ((Fila.tras + 1) MOD MAXTAM = Fila.frente) ENTÃO
+        ESCREVER "Erro: fila está cheia"
+        RETORNAR 0  // Retorna 0 para indicar falha na inserção
+    SENÃO
+        // Insere o item na posição apontada por tras
+        Fila.item[Fila.tras] <- x
+        // Move o ponteiro tras para a próxima posição circularmente
+        Fila.tras <- (Fila.tras + 1) MOD MAXTAM
+    FIM SE
+    RETORNAR 1  // Retorna 1 para indicar sucesso na inserção
+FIM FUNÇÃO
+
+// Função para remover um item da fila (Desenfileirar)
+FUNÇÃO Desenfileira(Fila: REFERENCIA TipoFila): TipoItem
+    SE Vazia(Fila) ENTÃO
+        ESCREVER "Erro: fila está vazia"
+        // Retorna um item com chave -1 para indicar erro
+        TipoItem itemVazio
+        itemVazio.Chave <- -1
+        RETORNAR itemVazio
+    SENÃO
+        // Armazena o índice do item a ser removido
+        idx <- Fila.frente
+        // Move o ponteiro frente para a próxima posição circularmente
+        Fila.frente <- (Fila.frente + 1) MOD MAXTAM
+        // Retorna o item removido
+        RETORNAR Fila.item[idx]
+    FIM SE
+FIM FUNÇÃO
+
