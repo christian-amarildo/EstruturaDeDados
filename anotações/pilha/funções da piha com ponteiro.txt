@@ -158,6 +158,9 @@ Tipo TipoPilha
     tamanho: Inteiro       // Tamanho atual da pilha.
 FimTipo
 
+
+
+
 // Procedimento que inicializa a pilha vazia.
 Procedimento FPVazia(var pilha: TipoPilha)
     pilha.topo ← novo Celula       // Aloca memória para a célula cabeça.
@@ -166,10 +169,16 @@ Procedimento FPVazia(var pilha: TipoPilha)
     pilha.tamanho ← 0              // Inicializa o tamanho da pilha com zero.
 FimProcedimento
 
+
+
+
 // Função que verifica se a pilha está vazia.
 Função vazia(pilha: TipoPilha): Booleano
     retornar (pilha.topo = pilha.fundo)  // A pilha está vazia se topo e fundo são iguais.
 FimFunção
+
+
+
 
 // Procedimento que empilha um item no topo da pilha.
 Procedimento empilha(x: TipoItem, var pilha: TipoPilha)
@@ -180,6 +189,9 @@ Procedimento empilha(x: TipoItem, var pilha: TipoPilha)
     pilha.topo ← aux                      // Atualiza o topo para a nova célula.
     pilha.tamanho ← pilha.tamanho + 1     // Incrementa o tamanho da pilha.
 FimProcedimento
+
+
+
 
 // Função que desempilha o item do topo da pilha.
 Função desempilha(var pilha: TipoPilha): TipoItem
@@ -200,10 +212,16 @@ Função desempilha(var pilha: TipoPilha): TipoItem
     fim se
 FimFunção
 
+
+
+
 // Função que retorna o tamanho atual da pilha.
 Função tamanho(pilha: TipoPilha): Inteiro
     retornar pilha.tamanho  // Retorna o campo 'tamanho' da estrutura da pilha.
 FimFunção
+
+
+
 
 // Programa principal para demonstração.
 Algoritmo Principal
