@@ -27,3 +27,34 @@ A implementação de filas utilizando apontadores com célula cabeça é uma té
 2. Desligar a célula cabeça da lista:
     - A célula que contém o primeiro elemento (`x1`) passa a ser a nova célula cabeça.
 3. Atualizar o apontador `frente` para a próxima célula.
+
+
+---------------------------------------------------------------
+CODIGO EM C++
+---------------------------------------------------------------
+Implementacao de Filas por meio de Apontadores
+
+typedef int TipoChave; 
+typedef struct TipoItem {
+    TipoChave Chave;
+    /* outros componentes */
+} TipoItem;
+
+typedef struct Celula *Apontador;
+
+typedef struct Celula {
+    TipoItem Item;
+    Apontador Prox;
+} Celula;
+
+typedef struct TipoFila {
+    Apontador Frente, Tras;
+} TipoFila;
+
+- A fila é implementada por meio de células.
+- Cada célula contém um item da fila e um apontador para outra célula.
+- A estrutura TipoFila contém um apontador para a frente da fila (célula cabeça) e um apontador para a parte de trás da fila.
+
+Esquema Visual:
+- Cabeça -> Célula -> Célula -> Item
+- TipoFila: Frente -> Prox -> Prox -> Tras
