@@ -95,37 +95,15 @@ Função Retira(p: inteiro, lista: TipoLista) -> TipoItem
 // Função Imprime - Exibe o conteúdo da lista com índice e valor
 Função Imprime(Lista: TipoLista) {
 
-    /*
-    Explicação Detalhada:
-    
-    A função "Imprime" tem o objetivo de exibir os elementos da lista juntamente com seus
-    respectivos índices. Cada elemento é mostrado no formato "índice - valor", onde:
-    
-    - 'Lista.primeiro': Representa o primeiro índice da lista (geralmente 0).
-    - 'Lista.ultimo': Representa o índice logo após o último item da lista, ou seja, o tamanho da lista.
-
-    Passos da função:
-
-    1. **Exibição do Cabeçalho**:
-        - Primeiramente, a função exibe um cabeçalho "p - key" para indicar que o índice (p) e
-        o valor correspondente (key) serão mostrados.
-
-    2. **Iteração pela Lista**:
-        - Em seguida, a função percorre a lista do primeiro item até o último válido (que é 
-        'Lista.ultimo - 1', já que 'Lista.ultimo' representa o próximo índice livre).
-        - Para cada item, o índice atual e o valor associado a esse índice são exibidos.
-    */
-
-    // Exibe o cabeçalho "p - key"
+    // Exibe o cabeçalho "Índice - Valor"
     Exibir "Índice - Valor"
 
     // Itera do primeiro até o último elemento da lista
     Para aux de Lista.primeiro até Lista.ultimo - 1 faça:
-        // Exibe o índice 'aux' e o valor associado a esse índice
         Exibir aux, "-", Lista.item[aux].valor
-    FimPara
+    Fim Para
 
-FimFunção
+Fim Função
 
 ------------------------------------------------------------------------------------------------------------
 
