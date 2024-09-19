@@ -1,0 +1,29 @@
+# Implementação de Filas por meio de Apontadores com Célula Cabeça
+
+## Introdução
+
+A implementação de filas utilizando apontadores com célula cabeça é uma técnica eficiente que simplifica as operações de enfileiramento e desenfileiramento, especialmente quando a fila está vazia.
+
+## Estrutura da Fila com Célula Cabeça
+
+1. **Célula Cabeça**: 
+    - Uma célula especial que serve como ponto de referência.
+    - Facilita a implementação das operações de enfileiramento e desenfileiramento.
+    - Quando a fila está vazia, os apontadores `frente` e `tras` apontam para esta célula.
+
+## Operações da Fila
+
+### Quando a Fila está Vazia
+- Os apontadores `frente` e `tras` apontam para a célula cabeça.
+
+### Enfileirar Novo Item
+1. Criar uma nova célula para o item a ser inserido.
+2. Ligar a nova célula após a célula apontada por `tras`.
+3. Atualizar o apontador `tras` para apontar para a nova célula.
+
+### Desenfileirar Item
+1. Verificar se a fila está vazia:
+    - Se vazia, não há operação a ser realizada.
+2. Desligar a célula cabeça da lista:
+    - A célula que contém o primeiro elemento (`x1`) passa a ser a nova célula cabeça.
+3. Atualizar o apontador `frente` para a próxima célula.
