@@ -192,6 +192,16 @@ FUNÇÃO Enfileira(x: TipoItem, Fila: REFERENCIA TipoFila): INTEIRO
     RETORNAR 1  // Retorna 1 para indicar sucesso na inserção
 FIM FUNÇÃO
 
+// Explicação da função Enfileira:
+// 1. A função Enfileira tenta adicionar um novo elemento 'x' à fila.
+// 2. Primeiro, ela verifica se a fila está cheia, comparando se o próximo índice de 'tras' seria igual ao índice de 'frente'.
+//    - Isso é feito usando a operação MOD, que permite o comportamento circular da fila.
+//    - Se a fila estiver cheia, a função escreve uma mensagem de erro e retorna 0, indicando falha.
+// 3. Se a fila não estiver cheia, o novo item 'x' é inserido na posição atual de 'tras'.
+// 4. O ponteiro 'tras' é então movido para a próxima posição usando o operador MOD para manter o índice dentro dos limites da fila.
+// 5. A função retorna 1 para indicar que o item foi enfileirado com sucesso.
+
+
 // Função para remover um item da fila (Desenfileirar)
 FUNÇÃO Desenfileira(Fila: REFERENCIA TipoFila): TipoItem
     SE Vazia(Fila) ENTÃO
@@ -210,3 +220,11 @@ FUNÇÃO Desenfileira(Fila: REFERENCIA TipoFila): TipoItem
     FIM SE
 FIM FUNÇÃO
 
+// Explicação da função Desenfileira:
+// 1. A função Desenfileira remove o item que está na frente da fila e o retorna.
+// 2. Primeiro, verifica se a fila está vazia usando a função Vazia.
+//    - Se estiver vazia, a função escreve uma mensagem de erro.
+//    - Cria um TipoItem chamado 'itemVazio' com uma chave -1 para indicar que a operação falhou, e retorna esse item.
+// 3. Se a fila não estiver vazia, armazena o índice atual da frente da fila em uma variável 'idx'.
+// 4. O ponteiro 'frente' é então movido para a próxima posição circularmente usando o operador MOD.
+// 5. Retorna o item armazenado anteriormente da posição 'idx'.
