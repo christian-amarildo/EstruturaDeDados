@@ -270,3 +270,26 @@ FUNÇÃO Desenfileira(Fila: REFERÊNCIA TipoFila) -> TipoItem {
     // Retorna o item da nova célula da frente
     RETORNAR Fila.Frente.Item
 } FIM_FUNÇÃO
+
+// Explicação:
+// A função `Desenfileira` remove um item da frente da fila. Aqui está o passo a passo do que ela faz:
+
+// 1. Verificação de Fila Vazia:
+//    - Primeiro, a função verifica se a fila está vazia usando a função `Vazia`.
+//    - Se a fila estiver vazia, ela imprime uma mensagem de erro e indica que houve um erro ao tentar remover um item. 
+//    - Isso evita a remoção de um elemento em uma fila sem elementos, o que causaria problemas.
+
+// 2. Remoção da Célula:
+//    - A função armazena a célula atual da frente (a ser removida) em uma variável temporária `q`.
+//    - O ponteiro `Frente` da fila é atualizado para apontar para a próxima célula, efetivamente "removendo" a primeira célula da fila.
+
+// 3. Liberação de Memória:
+//    - A célula armazenada em `q` é removida da memória usando a função `LIBERA_MEMÓRIA(q)`. 
+//    - Isso é importante para evitar vazamentos de memória, liberando o espaço ocupado pela célula removida.
+
+// 4. Retorno do Item:
+//    - Finalmente, a função retorna o item que agora está na nova célula da frente. 
+//    - Isso permite que o item removido seja utilizado ou processado após a operação de desenfileirar.
+
+// Essa operação tem uma complexidade de tempo constante O(1) porque envolve apenas a atualização de ponteiros e uma simples verificação. 
+// A célula cabeça facilita a remoção, mantendo uma referência constante, mesmo quando a fila estava vazia anteriormente.
