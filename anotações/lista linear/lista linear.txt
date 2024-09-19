@@ -67,37 +67,62 @@ Função Insere(x: TipoItem, lista: TipoLista) {
 //Pós-condição: A lista é atualizada para remover o item na posição p, e todos os itens subsequentes são deslocados para a esquerda. O item //removido é retornado.
 
 // Remove e retorna o item na posição p da lista
-Função Retira(p: inteiro, lista: TipoLista) -> TipoItem {
+Função Retira(p: inteiro, lista: TipoLista) -> TipoItem 
+{
+        // Verificação se a lista está vazia ou se a posição é inválida
     Se Vazia(lista) Ou p >= lista.ultimo Então
         Imprimir "Posição não existe"
         Retorne nulo
     Fim Se
 
+    // Armazenamento do item na posição 'p'
     item <- lista.item[p]
+
+    // Redução do tamanho da lista
     lista.ultimo <- lista.ultimo - 1
 
-    // Desloca os itens para a esquerda a partir da posição p
+    // Desloca os itens para a esquerda a partir da posição 'p'
     Para i de p Até lista.ultimo - 1 Faça
         lista.item[i] <- lista.item[i + 1]
     Fim Para
 
+    // Retorna o item removido
     Retorne item
 }
 
 ------------------------------------------------------------------------------------------------------------
 
+// Função Imprime - Exibe o conteúdo da lista com índice e valor
+Função Imprime(Lista: TipoLista) {
 
-// Função: Imprime os itens da lista na ordem de ocorrência
-// Entrada: L (Lista)
-// Saída: Nenhuma (apenas imprime os elementos da lista)
-// Pré-condição: L é definida e não está vazia
-// Pós-condição: L não é modificada e seus elementos são impressos
+    /*
+    Explicação Detalhada:
+    
+    A função "Imprime" tem o objetivo de exibir os elementos da lista juntamente com seus
+    respectivos índices. Cada elemento é mostrado no formato "índice - valor", onde:
+    
+    - 'Lista.primeiro': Representa o primeiro índice da lista (geralmente 0).
+    - 'Lista.ultimo': Representa o índice logo após o último item da lista, ou seja, o tamanho da lista.
 
-Imprime(Lista)
-    Exibir "p - key"  // Cabeçalho para exibição
+    Passos da função:
 
+    1. **Exibição do Cabeçalho**:
+        - Primeiramente, a função exibe um cabeçalho "p - key" para indicar que o índice (p) e
+        o valor correspondente (key) serão mostrados.
+
+    2. **Iteração pela Lista**:
+        - Em seguida, a função percorre a lista do primeiro item até o último válido (que é 
+        'Lista.ultimo - 1', já que 'Lista.ultimo' representa o próximo índice livre).
+        - Para cada item, o índice atual e o valor associado a esse índice são exibidos.
+    */
+
+    // Exibe o cabeçalho "p - key"
+    Exibir "Índice - Valor"
+
+    // Itera do primeiro até o último elemento da lista
     Para aux de Lista.primeiro até Lista.ultimo - 1 faça:
-        Exibir aux, "-", Lista.item[aux].valor  // Imprime o índice e o valor correspondente
+        // Exibe o índice 'aux' e o valor associado a esse índice
+        Exibir aux, "-", Lista.item[aux].valor
     FimPara
 
 FimFunção
