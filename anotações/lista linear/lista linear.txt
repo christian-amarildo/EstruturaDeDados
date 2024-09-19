@@ -61,17 +61,12 @@ Função Insere(x: TipoItem, lista: TipoLista) {
 ------------------------------------------------------------------------------------------------------------
 
 
-//Entrada: p (posição válida na lista), lista (uma instância de TipoLista)
-//Saída: O item da lista na posição p
-//Pré-condição: lista é definida e p é uma posição válida
-//Pós-condição: A lista é atualizada para remover o item na posição p, e todos os itens subsequentes são deslocados para a esquerda. O item //removido é retornado.
-
 // Remove e retorna o item na posição p da lista
 Função Retira(p: inteiro, lista: TipoLista) -> TipoItem 
 {
-        // Verificação se a lista está vazia ou se a posição é inválida
-    Se Vazia(lista) Ou p >= lista.ultimo Então
-        Imprimir "Posição não existe"
+    // Verificação se a lista está vazia ou se a posição é inválida
+    Se Vazia(lista) Ou p < 0 Ou p >= lista.ultimo Então
+        Imprimir "Posição não existe ou lista vazia"
         Retorne nulo
     Fim Se
 
@@ -82,7 +77,7 @@ Função Retira(p: inteiro, lista: TipoLista) -> TipoItem
     lista.ultimo <- lista.ultimo - 1
 
     // Desloca os itens para a esquerda a partir da posição 'p'
-    Para i de p Até lista.ultimo - 1 Faça
+    Para i de p Até lista.ultimo Faça
         lista.item[i] <- lista.item[i + 1]
     Fim Para
 
@@ -90,20 +85,26 @@ Função Retira(p: inteiro, lista: TipoLista) -> TipoItem
     Retorne item
 }
 
+
 ------------------------------------------------------------------------------------------------------------
 
 // Função Imprime - Exibe o conteúdo da lista com índice e valor
-Função Imprime(Lista: TipoLista) {
+Função Imprime(Lista: TipoLista) 
+{
+    // Verificação se a lista está vazia
+    Se Vazia(Lista) Então
+        Exibir "A lista está vazia."
+        Retorne
+    Fim Se
 
     // Exibe o cabeçalho "Índice - Valor"
     Exibir "Índice - Valor"
 
     // Itera do primeiro até o último elemento da lista
-    Para aux de Lista.primeiro até Lista.ultimo - 1 faça:
+    Para aux de Lista.primeiro até Lista.ultimo - 1 Faça
         Exibir aux, "-", Lista.item[aux].valor
     Fim Para
-
-Fim Função
+}
 
 ------------------------------------------------------------------------------------------------------------
 
