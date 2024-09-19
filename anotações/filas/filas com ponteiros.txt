@@ -53,9 +53,220 @@ typedef struct TipoFila {
 
 - A fila é implementada por meio de células.
 - Cada célula contém um item da fila e um apontador para outra célula.
-- A estrutura TipoFila contém um apontador para a frente da fila (célula cabeça) e um apontador para a parte de trás da fila.
+- A estrutura TipoFila contém um apontador para a frente da fila (célula cabeça)
+ e um apontador para a parte de trás da fila.
 
 Esquema Visual:
 - Cabeça -> Célula -> Célula -> Item
 - TipoFila: Frente -> Prox -> Prox -> Tras
 
+
+// Função para inicializar a fila como vazia
+void FFVazia(TipoFila *Fila)
+{
+    // Aloca dinamicamente a célula cabeça
+    Fila->Frente = (Apontador) malloc(sizeof(Celula));
+    // Inicializa o ponteiro Tras apontando para a célula cabeça
+    Fila->Tras = Fila->Frente;
+    // Define que o próximo da célula Frente é NULL, indicando que a fila está vazia
+    Fila->Frente->Prox = NULL;
+} /* FFVazia */
+
+// Função para verificar se a fila está vazia
+int Vazia(TipoFila *Fila)
+{
+    // Retorna verdadeiro (1) se o ponteiro Frente é igual ao ponteiro Tras, indicando fila vazia
+    return (Fila->Frente == Fila->Tras);
+} /* Vazia */
+
+
+
+
+void Enfileira(TipoItem x, TipoFila *Fila)
+{
+    Fila->Tras->Prox = (Apontador) malloc(sizeof(Celula));
+    Fila->Tras = Fila->Tras->Prox;
+    Fila->Tras->Item = x;
+    Fila->Tras->Prox = NULL;
+}
+
+
+A função `Enfileira` insere um novo item na fila. A função recebe dois parâmetros: o item a ser inserido (`x`)
+ e um ponteiro para a fila (`Fila`). 
+
+Aqui está uma explicação passo a passo do que o código faz:
+
+1. **Alocação de Memória para Nova Célula:** 
+    - `Fila->Tras->Prox = (Apontador) malloc(sizeof(Celula));`
+    - Esta linha cria um novo nó na fila alocando memória suficiente para armazenar uma nova célula. 
+    - `Fila->Tras->Prox` aponta para esta nova célula.
+
+2. **Atualizando o Ponteiro `Tras`:** 
+    - `Fila->Tras = Fila->Tras->Prox;`
+    - O ponteiro `Tras` da fila é atualizado para apontar para a nova célula que acabamos de criar.
+    
+3. **Armazenando o Item na Nova Célula:** 
+    - `Fila->Tras->Item = x;`
+    - A nova célula agora armazena o item `x` que foi passado para a função.
+    
+4. **Definindo o Próximo da Nova Célula como NULL:** 
+    - `Fila->Tras->Prox = NULL;`
+    - Como essa célula é agora o último item na fila, seu campo `Prox` (que aponta para o próximo elemento)
+     é definido como `NULL`.
+
+### Diagrama de Funcionamento:
+O diagrama ao lado mostra o estado da fila após a execução da função `Enfileira`. Inicialmente, a fila 
+tem uma célula (célula cabeça) e após a execução da função, uma nova célula contendo o item `x` é adicionada
+ ao final da fila.
+
+Este método é eficiente porque mantém um ponteiro para o final da fila (`Tras`), tornando a operação 
+de inserção em tempo constante O(1).
+
+
+
+
+
+
+TipoItem Desenfileira(TipoFila *Fila) {
+    Apontador q;
+    // Verifica se a fila está vazia
+    if (Vazia(Fila)) {
+        printf("Erro: fila está vazia\n");
+        // Indica um erro ao tentar desenfileirar de uma fila vazia
+        ERRO;
+    }
+    
+    // Armazena o apontador para a célula que será removida
+    q = Fila->Frente;
+    // Move o ponteiro Frente para a próxima célula
+    Fila->Frente = Fila->Frente->Prox;
+    // Libera a célula removida da memória
+    free(q);
+    // Retorna o item da nova célula da frente
+    return Fila->Frente->Item;
+}
+
+Explicação:
+Verificação de Fila Vazia: A função começa verificando se a fila está vazia usando a função Vazia(Fila). Se estiver, imprime uma mensagem de erro e executa ERRO, que deve ser definido em algum lugar do código para lidar com esse caso.
+Remoção do Primeiro Elemento: Se a fila não estiver vazia, armazena o apontador da célula da frente (Frente) em uma variável q.
+Atualização da Fila: O ponteiro Frente é atualizado para apontar para o próximo elemento da fila (Fila->Frente->Prox), efetivamente removendo o primeiro elemento da fila.
+Liberação de Memória: Libera a célula removida usando free(q) para evitar vazamentos de memória.
+Retorno do Item: Finalmente, retorna o item que agora está na frente da fila (Fila->Frente->Item).
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------
+CODIGO EM PSEUDOCÓDIGO
+---------------------------------------------------------------
+
+
+// Definição de Tipos
+TIPO TipoChave = INTEIRO
+
+ESTRUTURA TipoItem {
+    Chave: TipoChave
+    // outros componentes
+}
+
+ESTRUTURA Celula {
+    Item: TipoItem
+    Prox: Apontador
+}
+
+ESTRUTURA TipoFila {
+    Frente: Apontador
+    Tras: Apontador
+}
+
+
+
+
+
+
+// Função para inicializar a fila como vazia
+FUNÇÃO FFVazia(Fila: REFERÊNCIA TipoFila) {
+    // Aloca dinamicamente a célula cabeça
+    Fila.Frente <- ALOCAÇÃO_DE_MEMÓRIA(TAMANHO(Celula))
+    // Inicializa o ponteiro Tras apontando para a célula cabeça
+    Fila.Tras <- Fila.Frente
+    // Define que o próximo da célula Frente é NULL, indicando que a fila está vazia
+    Fila.Frente.Prox <- NULO
+} FIM_FUNÇÃO
+
+Funcionamento:
+A função FFVazia é usada para inicializar uma fila, criando uma célula especial chamada "célula cabeça" que serve como ponto de referência inicial. Essa célula é essencial porque facilita as operações futuras na fila, como enfileirar e desenfileirar, ao fornecer uma referência constante, mesmo quando a fila está vazia. Os ponteiros Frente e Tras são ambos configurados para apontar para esta célula cabeça, e o ponteiro Prox da célula é definido como NULL, indicando claramente que a fila não possui elementos no momento. Isso permite que o algoritmo trate a fila de maneira uniforme, evitando verificações adicionais e tornando a implementação mais simples e menos propensa a erros. Já a função Vazia verifica se a fila está vazia comparando os ponteiros Frente e Tras. Se ambos apontam para a célula cabeça, isso significa que não há elementos enfileirados entre eles, indicando que a fila está vazia. Essa verificação é crucial para evitar erros ao tentar remover elementos de uma fila que não contém nenhum, garantindo a integridade da estrutura de dados e prevenindo operações inválidas.
+
+
+
+
+
+// Função para verificar se a fila está vazia
+FUNÇÃO Vazia(Fila: REFERÊNCIA TipoFila) -> INTEIRO {
+    // Retorna verdadeiro (1) se o ponteiro Frente é igual ao ponteiro Tras, indicando fila vazia
+    RETORNAR (Fila.Frente == Fila.Tras)
+} FIM_FUNÇÃO
+
+// Explicação:
+// A função `Vazia` verifica se a fila está vazia. Ela faz isso comparando os ponteiros `Frente` e `Tras` da estrutura da fila.
+// Se ambos apontam para a mesma célula, significa que não há elementos na fila, ou seja, está vazia. 
+// Isso é útil para evitar operações de remoção (desenfileirar) quando a fila não contém elementos, prevenindo erros.
+
+
+
+
+
+
+// Função para inserir um item na fila
+
+// Função para inserir um item na fila
+FUNÇÃO Enfileira(x: TipoItem, Fila: REFERÊNCIA TipoFila) {
+    // Aloca dinamicamente uma nova célula
+    Fila.Tras.Prox <- ALOCAÇÃO_DE_MEMÓRIA(TAMANHO(Celula))
+    // Atualiza o ponteiro Tras para a nova célula
+    Fila.Tras <- Fila.Tras.Prox
+    // Armazena o item na nova célula
+    Fila.Tras.Item <- x
+    // Define que o próximo da nova célula é NULL
+    Fila.Tras.Prox <- NULO
+} FIM_FUNÇÃO
+
+// Explicação:
+// A função `Enfileira` adiciona um novo item ao final da fila. Primeiro, ela aloca dinamicamente uma nova célula para armazenar o item. 
+// Em seguida, ela ajusta o ponteiro `Tras` para apontar para esta nova célula. O item a ser enfileirado é então armazenado na célula 
+// recém-criada. Por fim, o ponteiro `Prox` da nova célula é definido como `NULL`, indicando que é o último elemento da fila. 
+// Esta implementação é eficiente, pois a operação de enfileirar ocorre em tempo constante O(1).
+
+
+
+
+
+
+// Função para remover um item da fila
+FUNÇÃO Desenfileira(Fila: REFERÊNCIA TipoFila) -> TipoItem {
+    Apontador q
+
+    // Verifica se a fila está vazia
+    SE (Vazia(Fila)) ENTÃO {
+        ESCREVER("Erro: fila está vazia")
+        // Indica um erro ao tentar desenfileirar de uma fila vazia
+        ERRO
+    }
+
+    // Armazena o apontador para a célula que será removida
+    q <- Fila.Frente
+    // Move o ponteiro Frente para a próxima célula
+    Fila.Frente <- Fila.Frente.Prox
+    // Libera a célula removida da memória
+    LIBERA_MEMÓRIA(q)
+    // Retorna o item da nova célula da frente
+    RETORNAR Fila.Frente.Item
+} FIM_FUNÇÃO
