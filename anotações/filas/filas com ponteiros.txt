@@ -58,3 +58,4 @@ typedef struct TipoFila {
 Esquema Visual:
 - Cabeça -> Célula -> Célula -> Item
 - TipoFila: Frente -> Prox -> Prox -> Tras
+
